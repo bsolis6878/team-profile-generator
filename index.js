@@ -1,4 +1,7 @@
 const inquirer = require('inquirer');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
 const initialQuestions = () => {
     return inquirer.prompt([
@@ -53,7 +56,12 @@ const initialQuestions = () => {
                     return false;
                 }
             }
-        },
+        }
+    ])
+}
+
+const addAnother = () => {
+    return inquirer.prompt([
         {
             type: 'list',
             name: 'continue',
@@ -179,11 +187,22 @@ const internQuestions = () => {
 
 initialQuestions()
     .then(data => {
+        const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.managerNumber)
+        console.log(manager);
+    })
+    .then(addAnother)
+    .then(data => {
         if (data.continue === 'Engineer') {
             engineerQuestions()
+                .then(data => {
+                    const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub)
+                    console.log(engineer);
+                })
         } else if (data.continue === 'Intern') {
-            internQuestions();
-        } else if (data.continue === 'Finish') {
-            // createHtml();
+            internQuestions()
+                .then(data => {
+                    const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
+                    console.log(intern);
+                })
         }
-    });
+    })
