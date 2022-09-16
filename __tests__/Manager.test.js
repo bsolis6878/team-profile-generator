@@ -1,7 +1,7 @@
 const Manager = require('../lib/Manager');
 
 test('tests for manager properties', () => {
-    const manager = new Manager('Kevin', 22, 'kevin@email.com', '2103334444');
+    const manager = new Manager('Kevin', 22, 'kevin@email.com', 2103334444);
 
     expect(manager.name).toEqual(expect.any(String));
     expect(manager.id).toEqual(expect.any(Number));
@@ -10,7 +10,7 @@ test('tests for manager properties', () => {
 });
 
 test('tests for manager methods', () => {
-    const manager = new Manager('Kevin', 22, 'kevin@email.com', '2103334444');
+    const manager = new Manager('Kevin', 22, 'kevin@email.com');
 
     expect(manager.getName()).toEqual('Kevin');
     expect(manager.getId()).toEqual(22);
