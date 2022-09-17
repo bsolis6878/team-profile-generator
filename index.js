@@ -3,6 +3,8 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+employees = []
+
 const initialQuestions = () => {
     return inquirer.prompt([
         {
@@ -69,6 +71,25 @@ const addAnother = () => {
             choices: ['Engineer', 'Intern', 'Finish']
         }
     ])
+    .then((answer) => {
+        if (answer.continue === 'Engineer') {
+            engineerQuestions()
+                .then(data => {
+                    const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub)
+                    employees.push(engineer);
+                })
+                .then(addAnother);
+        } else if (answer.continue === 'Intern') {
+            internQuestions()
+                .then(data => {
+                    const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
+                    employees.push(intern);
+                })
+                .then(addAnother);
+        } else if (answer.continue === 'Finish') {
+            console.log(employees);
+        }
+    })
 }
 
 const engineerQuestions = () => {
@@ -188,23 +209,6 @@ const internQuestions = () => {
 initialQuestions()
     .then(data => {
         const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.managerNumber)
-        console.log(manager);
+        employees.push(manager);
     })
     .then(addAnother)
-    .then(data => {
-        if (data.continue === 'Engineer') {
-            engineerQuestions()
-                .then(data => {
-                    const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub)
-                    console.log(engineer);
-                })
-                .then(addAnother);
-        } else if (data.continue === 'Intern') {
-            internQuestions()
-                .then(data => {
-                    const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
-                    console.log(intern);
-                })
-                .then(addAnother);
-        }
-    })
