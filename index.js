@@ -198,11 +198,13 @@ initialQuestions()
                     const engineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.engineerGithub)
                     console.log(engineer);
                 })
+                .then(addAnother);
         } else if (data.continue === 'Intern') {
             internQuestions()
                 .then(data => {
                     const intern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
                     console.log(intern);
                 })
+                .then(addAnother);
         }
     })
