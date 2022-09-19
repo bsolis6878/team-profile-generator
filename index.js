@@ -1,4 +1,6 @@
+const fs = require('fs/promises');
 const inquirer = require('inquirer');
+const template = require('./src/template');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -87,7 +89,7 @@ const addAnother = () => {
                 })
                 .then(addAnother);
         } else if (answer.continue === 'Finish') {
-            console.log(employees);
+            writeHtml(employees);
         }
     })
 }
@@ -204,6 +206,11 @@ const internQuestions = () => {
             }
         }
     ])
+}
+
+const writeHtml = employees => {
+    fs.writeFile('./dist/index.html', template(employees), {encoding: 'utf-8'})
+    .catch(err => console.error(err))
 }
 
 initialQuestions()
