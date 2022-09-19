@@ -209,8 +209,13 @@ const internQuestions = () => {
 }
 
 const writeHtml = employees => {
-    fs.writeFile('./dist/index.html', template(employees), {encoding: 'utf-8'})
-    .catch(err => console.error(err))
+    fs.writeFile('./dist/index.html', template(employees), (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("File created! Check the dist folder for the HTML page.")
+        }
+    })
 }
 
 initialQuestions()
