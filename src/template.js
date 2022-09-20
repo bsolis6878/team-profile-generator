@@ -8,19 +8,20 @@ module.exports = data => {
        <meta http-equiv="X-UA-Compatible" content="ie=edge">
        <title>Team Profile</title>
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+       <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <header class="bg-danger">
+        <header>
             <h1 class="text-center py-5">Team Profile</h1>
         </header>
-        <main class="d-flex justify-content-center flex-row">
+        <main class="d-flex justify-content-center flex-row flex-wrap">
             ${data.map((employee) => (   
                 ` 
                 <div class="d-flex flex-column m-5 p-5 text-center">
-                    <div class="bg-dark p-3">
+                    <div class="box-header p-3">
                         <h5>${nameCheck(employee)}</h5>
                     </div>
-                    <div class="bg-secondary d-flex flex-column p-3">
+                    <div class="d-flex flex-column p-3">
                         <span>Employee ID: ${employee.id}</span>
                         <span>Email: <a href="mailto: ${employee.email}">${employee.email}</a></span>
                         <span>${dataChecks(employee)}</span>
