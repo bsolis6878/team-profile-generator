@@ -209,11 +209,10 @@ const internQuestions = () => {
 }
 
 const writeHtml = employees => {
+    console.log("File created! Check the dist folder for the HTML page.")
     fs.writeFile('./dist/index.html', template(employees), (err) => {
         if (err) {
             console.log(err);
-        } else {
-            console.log("File created! Check the dist folder for the HTML page.")
         }
     })
 }

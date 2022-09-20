@@ -17,12 +17,12 @@ module.exports = data => {
             ${data.map((employee) => (   
                 ` 
                 <div class="d-flex flex-column m-5 p-5 text-center">
-                    <div class="bg-dark p-2">
+                    <div class="bg-dark p-3">
                         <h5>${nameCheck(employee)}</h5>
                     </div>
-                    <div class="bg-secondary d-flex flex-column p-2">
+                    <div class="bg-secondary d-flex flex-column p-3">
                         <span>Employee ID: ${employee.id}</span>
-                        <span>Email: ${employee.email}</span>
+                        <span>Email: <a href="mailto: ${employee.email}">${employee.email}</a></span>
                         <span>${dataChecks(employee)}</span>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ const dataChecks = (employee) => {
     if (employee.officeNumber) {
         return `Office number: ${employee.officeNumber}`
     } else if (employee.github) {
-        return `Github: ${employee.github}`
+        return `Github: <a href="https://github.com/${employee.github}" target="_blank">${employee.github}</a>`
     } else if (employee.school) {
         return `School: ${employee.school}`
     }
